@@ -1,6 +1,7 @@
-package com.qkun.wanandroid_java;
+package com.qkun.wanandroid_java.ui;
 
-import android.os.Bundle;
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -9,23 +10,28 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.qkun.wanandroid_java.R;
 import com.qkun.wanandroid_java.base.BaseActivity;
 import com.qkun.wanandroid_java.base.BaseFragment;
 import com.qkun.wanandroid_java.ui.home.HomeFragment;
 import com.qkun.wanandroid_java.ui.knowledge.KnowledgeFragment;
 import com.qkun.wanandroid_java.ui.navigation.NavigationFragment;
 import com.qkun.wanandroid_java.ui.project.ProjectFragment;
+import com.qkun.wanandroid_java.ui.search.SearchActivity;
 import com.qkun.wanandroid_java.ui.wechat.WeChatFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity {
     @BindView(R.id.drawer_layout)
@@ -64,6 +70,7 @@ public class MainActivity extends BaseActivity {
         initBottomNavigation();
 
         initDrawerLayout();
+        initNavigation();
     }
 
 
@@ -85,7 +92,7 @@ public class MainActivity extends BaseActivity {
     private void initBottomNavigation() {
         mBottomNavigation.setMode(BottomNavigationBar.MODE_FIXED);
         mBottomNavigation.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
-        mBottomNavigation.setActiveColor(R.color.colorPrimary)
+        mBottomNavigation.setActiveColor(R.color.colorAccent)
                 .addItem(new BottomNavigationItem(R.drawable.ic_home_black_24dp, getString(R.string.home)))
                 .addItem(new BottomNavigationItem(R.drawable.ic_apps_black_24dp, getString(R.string.knowledge_system)))
                 .addItem(new BottomNavigationItem(R.drawable.ic_wechat_black_24dp, getString(R.string.wechat)))
@@ -161,5 +168,52 @@ public class MainActivity extends BaseActivity {
         toggle.syncState();
     }
 
+    private void initNavigation() {
+        TextView nav_username = mNavView.getHeaderView(0).findViewById(R.id.tv_username);
+        //设置用户名字
 
+        mNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.nav_collect:
+                        Toast.makeText(MainActivity.this, "收藏", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.nav_setting:
+                        Toast.makeText(MainActivity.this, "设置", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.nav_about_us:
+                        Toast.makeText(MainActivity.this, "关于我们", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.nav_logout:
+                        Toast.makeText(MainActivity.this, "退出登录", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.nav_night_mode:
+                        Toast.makeText(MainActivity.this, "夜间模式", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.nav_todo:
+                        Toast.makeText(MainActivity.this, "todo", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                return true;
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_activity_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

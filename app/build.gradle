@@ -46,6 +46,8 @@ dependencies {
     implementation 'org.jetbrains:annotations-java5:15.0'
     //BottomNavigationView
     implementation 'com.ashokvarma.android:bottom-navigation-bar:2.0.4'
+    //circleimageview
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 
 
 }

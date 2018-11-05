@@ -1,4 +1,4 @@
-package com.qkun.wanandroid_java.ui;
+package com.qkun.wanandroid_java.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;

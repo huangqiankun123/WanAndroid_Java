@@ -1,9 +1,7 @@
 package com.qkun.wanandroid_java.base;
 
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.qkun.wanandroid_java.constant.Constant;
 import com.qkun.wanandroid_java.constant.LoadType;
@@ -13,11 +11,8 @@ import com.qkun.wanandroid_java.di.mudule.ActivityModule;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
-
 import java.util.List;
-
 import javax.inject.Inject;
-
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 

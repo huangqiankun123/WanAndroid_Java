@@ -12,17 +12,20 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.qkun.wanandroid_java.R;
 import com.qkun.wanandroid_java.base.BaseActivity;
 import com.qkun.wanandroid_java.base.BaseFragment;
 import com.qkun.wanandroid_java.ui.home.HomeFragment;
 import com.qkun.wanandroid_java.ui.knowledge.KnowledgeFragment;
+import com.qkun.wanandroid_java.ui.login.LoginActivity;
 import com.qkun.wanandroid_java.ui.navigation.NavigationFragment;
 import com.qkun.wanandroid_java.ui.project.ProjectFragment;
 import com.qkun.wanandroid_java.ui.search.SearchActivity;
@@ -171,7 +174,14 @@ public class MainActivity extends BaseActivity {
     private void initNavigation() {
         TextView nav_username = mNavView.getHeaderView(0).findViewById(R.id.tv_username);
         //设置用户名字
-
+        nav_username.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                ActivityUtils.startActivity(LoginActivity.class);
+                Intent intent =new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(intent);
+            }
+        });
         mNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {

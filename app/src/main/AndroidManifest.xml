@@ -24,6 +24,10 @@
             android:name=".ui.search.SearchActivity"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".ui.login.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.FullScreen"/>
+
     </application>
 
 </manifest>

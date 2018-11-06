@@ -178,14 +178,7 @@ public class MainActivity extends BaseActivity {
         mNav_username = mNavView.getHeaderView(0).findViewById(R.id.tv_username);
 
 
-        mNav_username.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                ActivityUtils.startActivity(LoginActivity.class);
-                Intent intent =new Intent(MainActivity.this,LoginActivity.class);
-                startActivity(intent);
-            }
-        });
+
         mNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -219,8 +212,18 @@ public class MainActivity extends BaseActivity {
         super.onResume();
         //设置用户名字
         String username = SPUtils.getInstance(Constant.SHARED_NAME).getString(Constant.USERNAME_KEY);
-        if (!username.isEmpty()){
+        if (!username.isEmpty()) {
             mNav_username.setText(username);
+        }
+        if (mNav_username.getText().toString().equals(getString(R.string.login))) {
+            mNav_username.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ActivityUtils.startActivity(LoginActivity.class);
+//                    Intent intent =new Intent(MainActivity.this,LoginActivity.class);
+//                    startActivity(intent);
+                }
+            });
         }
     }
 

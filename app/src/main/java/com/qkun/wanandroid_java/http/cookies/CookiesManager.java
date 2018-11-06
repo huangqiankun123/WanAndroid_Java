@@ -1,6 +1,5 @@
-package com.qkun.wanandroid_java.net.cookies;
+package com.qkun.wanandroid_java.http.cookies;
 
-import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 
 import java.util.List;

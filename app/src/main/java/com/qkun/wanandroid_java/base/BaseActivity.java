@@ -2,6 +2,8 @@ package com.qkun.wanandroid_java.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.qkun.wanandroid_java.constant.Constant;
 import com.qkun.wanandroid_java.constant.LoadType;
@@ -19,11 +21,13 @@ import butterknife.Unbinder;
 /**
  * Created by QKun on 2018/10/31.
  */
-public abstract class BaseActivity<T extends BaseContract.BaseIPresent> extends RxAppCompatActivity implements BaseContract.BaseIView {
-
+public abstract class BaseActivity<T extends BaseContract.BaseIPresent> extends RxAppCompatActivity implements BaseContract.BaseIView ,View.OnClickListener {
+    @Nullable
     @Inject
     protected T mPresenter;
-    private ActivityComponent mActivityComponent;
+
+    protected ActivityComponent mActivityComponent;
+
     private Unbinder mBind;
 
     /**
@@ -97,6 +101,10 @@ public abstract class BaseActivity<T extends BaseContract.BaseIPresent> extends 
         detachView();
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
 
     @Override
     public void showLoading() {

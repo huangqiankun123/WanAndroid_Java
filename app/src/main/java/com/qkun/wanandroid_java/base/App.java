@@ -3,6 +3,7 @@ package com.qkun.wanandroid_java.base;
 import android.app.Application;
 import android.content.Context;
 
+import com.blankj.utilcode.util.Utils;
 import com.qkun.wanandroid_java.di.component.ApplicationComponent;
 import com.qkun.wanandroid_java.di.component.DaggerApplicationComponent;
 import com.qkun.wanandroid_java.di.mudule.ApplicationModule;
@@ -19,6 +20,7 @@ public class App extends Application {
         super.onCreate();
         mInstance = this;
         initApplicationComponent();
+        Utils.init(this);
     }
 
     public static Context getAppContext() {

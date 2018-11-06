@@ -1,4 +1,4 @@
-package com.qkun.wanandroid_java.net.cookies;
+package com.qkun.wanandroid_java.http.cookies;
 
 import android.content.SharedPreferences;
 import android.text.TextUtils;

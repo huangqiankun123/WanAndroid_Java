@@ -1,4 +1,4 @@
-package com.qkun.wanandroid_java.net.cookies;
+package com.qkun.wanandroid_java.http.cookies;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

@@ -6,6 +6,7 @@ import android.content.Context;
 import com.qkun.wanandroid_java.di.mudule.ActivityModule;
 import com.qkun.wanandroid_java.di.scope.ContextLife;
 import com.qkun.wanandroid_java.di.scope.PerActivity;
+import com.qkun.wanandroid_java.ui.login.LoginActivity;
 
 import dagger.Component;
 
@@ -25,4 +26,5 @@ public interface ActivityComponent {
     Activity getActivity();
 
     //只要获取ActivityActivityComponent  就可以在下面的类中依赖成功
+    void inject(LoginActivity activity);
 }

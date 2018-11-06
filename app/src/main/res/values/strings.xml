@@ -55,6 +55,7 @@
     <string name="login_tint">请先登录</string>
     <string name="login_ing">登录中...</string>
     <string name="register_ing">注册中...</string>
+    <string name="the_username_or_password_can_not_be_empty">用户名或密码不能为空</string>
 
     <!-- Home -->
     <string name="collect_success">收藏成功</string>

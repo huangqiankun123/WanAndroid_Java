@@ -20,9 +20,11 @@ import android.widget.Toast;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.qkun.wanandroid_java.R;
 import com.qkun.wanandroid_java.base.BaseActivity;
 import com.qkun.wanandroid_java.base.BaseFragment;
+import com.qkun.wanandroid_java.constant.Constant;
 import com.qkun.wanandroid_java.ui.home.HomeFragment;
 import com.qkun.wanandroid_java.ui.knowledge.KnowledgeFragment;
 import com.qkun.wanandroid_java.ui.login.LoginActivity;
@@ -51,6 +53,7 @@ public class MainActivity extends BaseActivity {
     NavigationView mNavView;
 
     List<BaseFragment> mFragments = new ArrayList<>();
+    private TextView mNav_username;
 
 
     @Override
@@ -172,9 +175,10 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initNavigation() {
-        TextView nav_username = mNavView.getHeaderView(0).findViewById(R.id.tv_username);
-        //设置用户名字
-        nav_username.setOnClickListener(new View.OnClickListener() {
+        mNav_username = mNavView.getHeaderView(0).findViewById(R.id.tv_username);
+
+
+        mNav_username.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                ActivityUtils.startActivity(LoginActivity.class);
@@ -208,6 +212,16 @@ public class MainActivity extends BaseActivity {
                 return true;
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //设置用户名字
+        String username = SPUtils.getInstance().getString(Constant.USERNAME_KEY);
+        if (!username.isEmpty()){
+            mNav_username.setText(username);
+        }
     }
 
     @Override

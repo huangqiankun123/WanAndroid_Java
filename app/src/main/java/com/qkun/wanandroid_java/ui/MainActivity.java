@@ -218,7 +218,7 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         //设置用户名字
-        String username = SPUtils.getInstance().getString(Constant.USERNAME_KEY);
+        String username = SPUtils.getInstance(Constant.SHARED_NAME).getString(Constant.USERNAME_KEY);
         if (!username.isEmpty()){
             mNav_username.setText(username);
         }

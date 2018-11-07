@@ -27,6 +27,11 @@
         <item android:id="@+id/nav_logout"
             android:icon="@drawable/ic_logout_white_24dp"
             android:title="@string/nav_logout"/>
+    </group>
 
+    <group android:id="@+id/group_two">
+        <item android:id="@+id/nav_defined"
+            android:icon="@drawable/ic_defined_white_24dp"
+            android:title="@string/nav_defined"/>
     </group>
 </menu>

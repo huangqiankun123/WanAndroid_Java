@@ -201,6 +201,9 @@ public class MainActivity extends BaseActivity {
                     case R.id.nav_todo:
                         Toast.makeText(MainActivity.this, "todo", Toast.LENGTH_SHORT).show();
                         break;
+                    case R.id.nav_defined:
+                        Toast.makeText(MainActivity.this, "我们玩自定义控件去了奥", Toast.LENGTH_SHORT).show();
+                        break;
                 }
                 return true;
             }

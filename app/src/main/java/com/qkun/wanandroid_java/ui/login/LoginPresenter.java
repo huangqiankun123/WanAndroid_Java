@@ -32,7 +32,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
 
                     @Override
                     public void _onError(String msg) {
-                        mView.showFaild(msg);
+                        mView.showFailed(msg);
                     }
                 });
     }

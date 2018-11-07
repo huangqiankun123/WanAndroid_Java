@@ -28,7 +28,7 @@ public class BaseContract {
         void showSuccess(String message);
 
         //失败重试
-        void showFaild(String message);
+        void showFailed(String message);
 
         //显示当前网络不可用
         void showNoNet();

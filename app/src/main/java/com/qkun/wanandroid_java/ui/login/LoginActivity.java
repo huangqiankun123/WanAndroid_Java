@@ -74,4 +74,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         }
     }
 
+    @Override
+    public void showFailed(String message) {
+
+    }
 }

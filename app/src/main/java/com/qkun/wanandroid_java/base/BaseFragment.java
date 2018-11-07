@@ -37,7 +37,7 @@ public abstract class BaseFragment<T extends BaseContract.BaseIPresent> extends 
     protected Activity mActivity;
     //根布局视图
     private View mRootView;
-    private FragmentComponent mFragmentComponent;
+    protected FragmentComponent mFragmentComponent;
 
     @Inject
     protected T mPresenter;
@@ -182,7 +182,7 @@ public abstract class BaseFragment<T extends BaseContract.BaseIPresent> extends 
     }
 
     @Override
-    public void showFaild(String message) {
+    public void showFailed(String message) {
 
     }
 

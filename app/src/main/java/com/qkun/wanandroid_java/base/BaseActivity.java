@@ -122,7 +122,7 @@ public abstract class BaseActivity<T extends BaseContract.BaseIPresent> extends 
     }
 
     @Override
-    public void showFaild(String message) {
+    public void showFailed(String message) {
 
     }
 

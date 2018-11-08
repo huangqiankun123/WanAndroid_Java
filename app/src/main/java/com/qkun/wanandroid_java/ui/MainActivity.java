@@ -20,7 +20,6 @@ import android.widget.Toast;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.blankj.utilcode.util.ActivityUtils;
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.qkun.wanandroid_java.R;
@@ -45,7 +44,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import okhttp3.Cookie;
 
 public class MainActivity extends BaseActivity {
     @BindView(R.id.drawer_layout)
@@ -206,23 +204,12 @@ public class MainActivity extends BaseActivity {
                         Toast.makeText(MainActivity.this, "关于我们", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.nav_logout:
-                        RetrofitManager.createApi(ApiService.class)
-                                .logout()
-                                .compose(RxSchedulers.applySchedulers())
-                                .subscribe(new BaseObserver<Object>() {
-                                    @Override
-                                    public void _onNext(Object o) {
-                                        ToastUtils.showShort("退出登录！");
-                                        CookiesManager.clearAllCookies();
-                                        SPUtils.getInstance(Constant.SHARED_NAME).clear();
-                                        mNav_username.setText(getString(R.string.login));
-                                    }
-
-                                    @Override
-                                    public void _onError(String msg) {
-
-                                    }
-                                });
+                        boolean isLogin = SPUtils.getInstance(Constant.SHARED_NAME).getBoolean(Constant.LOGIN_KEY);
+                        if (isLogin) {
+                            logout();
+                        } else {
+                            ToastUtils.showShort("啊呆！");
+                        }
                         break;
                     case R.id.nav_night_mode:
                         Toast.makeText(MainActivity.this, "夜间模式", Toast.LENGTH_SHORT).show();
@@ -237,6 +224,29 @@ public class MainActivity extends BaseActivity {
                 return true;
             }
         });
+    }
+
+    /**
+     * 退出登录
+     */
+    private void logout() {
+        RetrofitManager.createApi(ApiService.class)
+                .logout()
+                .compose(RxSchedulers.applySchedulers())
+                .subscribe(new BaseObserver<Object>() {
+                    @Override
+                    public void _onNext(Object o) {
+                        ToastUtils.showShort("退出登录！");
+                        CookiesManager.clearAllCookies();
+                        SPUtils.getInstance(Constant.SHARED_NAME).clear();
+                        mNav_username.setText(getString(R.string.login));
+                    }
+
+                    @Override
+                    public void _onError(String msg) {
+
+                    }
+                });
     }
 
     @Override

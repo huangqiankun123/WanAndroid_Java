@@ -29,6 +29,7 @@ public class HomeAdapter extends BaseQuickAdapter<ArticlesBean.DatasBean, BaseVi
 
     @Override
     protected void convert(BaseViewHolder helper, ArticlesBean.DatasBean item) {
+
         TextView tv_article_tag = helper.getView(R.id.tv_article_tag);
         List<ArticlesBean.DatasBean.TagsBean> tags = item.getTags();
         if (!tags.isEmpty() && tags.size() != 0) {
@@ -39,6 +40,12 @@ public class HomeAdapter extends BaseQuickAdapter<ArticlesBean.DatasBean, BaseVi
         }
         helper.setText(R.id.tv_article_author, item.getAuthor());
         helper.setText(R.id.tv_article_date, item.getNiceDate());
+        TextView tv_article_new = helper.getView(R.id.tv_article_new);
+        if (item.getNiceDate().contains("小时")){
+            tv_article_new.setVisibility(View.VISIBLE);
+        }else {
+            tv_article_new.setVisibility(View.GONE);
+        }
         ImageView iv_article_thumbnail = helper.getView(R.id.iv_article_thumbnail);
         if (!item.getEnvelopePic().isEmpty()) {
             iv_article_thumbnail.setVisibility(View.VISIBLE);
@@ -56,6 +63,8 @@ public class HomeAdapter extends BaseQuickAdapter<ArticlesBean.DatasBean, BaseVi
         } else {
             helper.setImageResource(R.id.iv_like, R.drawable.ic_like_not);
         }
+
+        helper.addOnClickListener(R.id.iv_like);
 
 
     }

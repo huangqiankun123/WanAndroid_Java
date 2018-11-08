@@ -7,15 +7,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.qkun.wanandroid_java.R;
 import com.qkun.wanandroid_java.base.BaseActivity;
 import com.qkun.wanandroid_java.bean.LoginBean;
 import com.qkun.wanandroid_java.constant.Constant;
+import com.qkun.wanandroid_java.http.cookies.CookiesManager;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.Cookie;
 
 /**
  * Created by QKun on 2018/11/5.
@@ -76,6 +81,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     @Override
     public void showFailed(String message) {
-
+        ToastUtils.showShort(message);
     }
 }

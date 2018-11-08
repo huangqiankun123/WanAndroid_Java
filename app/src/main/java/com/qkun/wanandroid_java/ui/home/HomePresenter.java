@@ -3,8 +3,9 @@ package com.qkun.wanandroid_java.ui.home;
 import android.annotation.SuppressLint;
 
 import com.qkun.wanandroid_java.base.BasePresenter;
-import com.qkun.wanandroid_java.bean.HomeBannerBean;
 import com.qkun.wanandroid_java.bean.ArticlesBean;
+import com.qkun.wanandroid_java.bean.CollectStatus;
+import com.qkun.wanandroid_java.bean.HomeBannerBean;
 import com.qkun.wanandroid_java.constant.Constant;
 import com.qkun.wanandroid_java.constant.LoadType;
 import com.qkun.wanandroid_java.http.ApiService;
@@ -127,5 +128,55 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
         mIsRefresh = false;
         loadHomeArticles();
     }
+
+    @SuppressLint("CheckResult")
+    @Override
+    public void collect(int id, final int position) {
+        RetrofitManager.createApi(ApiService.class)
+                .collect(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CollectStatus>() {
+                    @Override
+                    public void accept(CollectStatus collectStatus) throws Exception {
+                        if (collectStatus.getErrorCode() != 0) {
+                            mView.collectFailed(collectStatus.getErrorMsg());
+                        } else {
+                            mView.collectSuccess(position);
+                        }
+
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        mView.showFailed(throwable.getMessage());
+                    }
+                });
+    }
+
+    @SuppressLint("CheckResult")
+    @Override
+    public void unCollect(int id, final int position) {
+        RetrofitManager.createApi(ApiService.class)
+                .unCollect(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CollectStatus>() {
+                    @Override
+                    public void accept(CollectStatus collectStatus) throws Exception {
+                        if (collectStatus.getErrorCode() != 0) {
+                            mView.unCollectFailed(collectStatus.getErrorMsg());
+                        } else {
+                            mView.unCollectSuccess(position);
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        mView.showFailed(throwable.getMessage());
+                    }
+                });
+    }
+
 
 }

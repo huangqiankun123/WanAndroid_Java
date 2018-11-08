@@ -29,8 +29,7 @@ public class CookiesManager implements CookieJar {
             for (Cookie cookie : cookies) {
                 cookieStore.add(url, cookie);
             }
-        } else {
-//            ActivityUtils.startActivity(LoginActivity.class);
+            LogUtils.d("cookie",cookieStore.toString());
         }
     }
 

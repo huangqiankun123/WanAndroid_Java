@@ -18,6 +18,14 @@ public interface HomeContract {
 
         void getHomeBanner(List<HomeBannerBean> beans);
 
+        void collectSuccess(int position);
+
+        void collectFailed(String msg);
+
+        void unCollectSuccess(int position);
+
+        void unCollectFailed(String msg);
+
     }
 
     interface Presenter extends BaseContract.BaseIPresent<HomeContract.View> {
@@ -31,5 +39,11 @@ public interface HomeContract {
         void refresh();
 
         void loadMore();
+
+        //收藏
+        void collect(int id,int position);
+
+        //取消收藏
+        void unCollect(int id,int position);
     }
 }

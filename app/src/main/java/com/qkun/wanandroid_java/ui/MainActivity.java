@@ -20,11 +20,19 @@ import android.widget.Toast;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.qkun.wanandroid_java.R;
 import com.qkun.wanandroid_java.base.BaseActivity;
 import com.qkun.wanandroid_java.base.BaseFragment;
 import com.qkun.wanandroid_java.constant.Constant;
+import com.qkun.wanandroid_java.http.ApiService;
+import com.qkun.wanandroid_java.http.BaseObserver;
+import com.qkun.wanandroid_java.http.RetrofitManager;
+import com.qkun.wanandroid_java.http.RxSchedulers;
+import com.qkun.wanandroid_java.http.cookies.CookiesManager;
+import com.qkun.wanandroid_java.ui.collect.CollectActivity;
 import com.qkun.wanandroid_java.ui.home.HomeFragment;
 import com.qkun.wanandroid_java.ui.knowledge.KnowledgeFragment;
 import com.qkun.wanandroid_java.ui.login.LoginActivity;
@@ -37,6 +45,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import okhttp3.Cookie;
 
 public class MainActivity extends BaseActivity {
     @BindView(R.id.drawer_layout)
@@ -178,13 +187,17 @@ public class MainActivity extends BaseActivity {
         mNav_username = mNavView.getHeaderView(0).findViewById(R.id.tv_username);
 
 
-
         mNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.nav_collect:
-                        Toast.makeText(MainActivity.this, "收藏", Toast.LENGTH_SHORT).show();
+                        boolean aBoolean = SPUtils.getInstance(Constant.SHARED_NAME).getBoolean(Constant.LOGIN_KEY);
+                        if (aBoolean) {
+                            ActivityUtils.startActivity(CollectActivity.class);
+                        } else {
+                            ActivityUtils.startActivity(LoginActivity.class);
+                        }
                         break;
                     case R.id.nav_setting:
                         Toast.makeText(MainActivity.this, "设置", Toast.LENGTH_SHORT).show();
@@ -193,7 +206,23 @@ public class MainActivity extends BaseActivity {
                         Toast.makeText(MainActivity.this, "关于我们", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.nav_logout:
-                        Toast.makeText(MainActivity.this, "退出登录", Toast.LENGTH_SHORT).show();
+                        RetrofitManager.createApi(ApiService.class)
+                                .logout()
+                                .compose(RxSchedulers.applySchedulers())
+                                .subscribe(new BaseObserver<Object>() {
+                                    @Override
+                                    public void _onNext(Object o) {
+                                        ToastUtils.showShort("退出登录！");
+                                        CookiesManager.clearAllCookies();
+                                        SPUtils.getInstance(Constant.SHARED_NAME).clear();
+                                        mNav_username.setText(getString(R.string.login));
+                                    }
+
+                                    @Override
+                                    public void _onError(String msg) {
+
+                                    }
+                                });
                         break;
                     case R.id.nav_night_mode:
                         Toast.makeText(MainActivity.this, "夜间模式", Toast.LENGTH_SHORT).show();
@@ -223,8 +252,6 @@ public class MainActivity extends BaseActivity {
                 @Override
                 public void onClick(View v) {
                     ActivityUtils.startActivity(LoginActivity.class);
-//                    Intent intent =new Intent(MainActivity.this,LoginActivity.class);
-//                    startActivity(intent);
                 }
             });
         }

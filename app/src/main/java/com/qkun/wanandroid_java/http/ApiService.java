@@ -1,5 +1,7 @@
 package com.qkun.wanandroid_java.http;
 
+import com.qkun.wanandroid_java.bean.CollectBean;
+import com.qkun.wanandroid_java.bean.CollectStatus;
 import com.qkun.wanandroid_java.bean.HomeBannerBean;
 import com.qkun.wanandroid_java.bean.ArticlesBean;
 import com.qkun.wanandroid_java.bean.LoginBean;
@@ -19,6 +21,7 @@ import retrofit2.http.Path;
 public interface ApiService {
     /**
      * 登录
+     *
      * @param username
      * @param password
      */
@@ -27,7 +30,16 @@ public interface ApiService {
     Observable<BaseResponse<LoginBean>> Login(@Field("username") String username, @Field("password") String password);
 
     /**
+     * 退出APP
+     *
+     * @return
+     */
+    @GET("user/logout/json")
+    Observable<BaseResponse<Object>> logout();
+
+    /**
      * 首页文章列表
+     *
      * @param page
      * @return
      */
@@ -36,8 +48,36 @@ public interface ApiService {
 
     /**
      * 首页banner
+     *
      * @return
      */
     @GET("banner/json")
     Observable<BaseResponse<List<HomeBannerBean>>> getHomeBanner();
+
+    /**
+     * 6.1 收藏文章列表
+     * @param page
+     * @return
+     */
+    @GET("lg/collect/list/{page}/json")
+    Observable<BaseResponse<CollectBean>> getCollectList(@Path("page") int page);
+
+    /**
+     * 6.2 收藏站内文章
+     *
+     * @param id
+     * @return
+     */
+    @POST("lg/collect/{id}/json")
+    Observable<CollectStatus> collect(@Path("id") int id);
+
+    /**
+     * 取消收藏
+     * 6.4.1 文章列表
+     *
+     * @param id
+     * @return
+     */
+    @POST("lg/uncollect_originId/{id}/json")
+    Observable<CollectStatus> unCollect(@Path("id") int id);
 }

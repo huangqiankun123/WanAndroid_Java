@@ -2,9 +2,13 @@ package com.qkun.wanandroid_java.base;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.v7.app.AppCompatDelegate;
 
+import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.SpanUtils;
 import com.blankj.utilcode.util.Utils;
 import com.qkun.wanandroid_java.R;
+import com.qkun.wanandroid_java.constant.Constant;
 import com.qkun.wanandroid_java.di.component.ApplicationComponent;
 import com.qkun.wanandroid_java.di.component.DaggerApplicationComponent;
 import com.qkun.wanandroid_java.di.mudule.ApplicationModule;
@@ -30,6 +34,16 @@ public class App extends Application {
         mInstance = this;
         initApplicationComponent();
         Utils.init(this);
+        setNightMode();
+    }
+
+    /**
+     * 初始化夜间模式
+     */
+    private void setNightMode() {
+        boolean nightMode = SPUtils.getInstance(Constant.SHARED_NAME).getBoolean(Constant.NIGHT_KEY);
+        AppCompatDelegate.setDefaultNightMode(nightMode ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+
     }
 
     public static Context getAppContext() {
@@ -48,9 +62,10 @@ public class App extends Application {
     /**
      * BaseActivity和BaseFragment中能获取到同一个ApplicationComponent实例
      * 在此提供方法给BaseActivity和BaseFragment 并保证获取ApplicationComponent 是唯一的
+     *
      * @return
      */
-    public ApplicationComponent getApplicationComponent(){
+    public ApplicationComponent getApplicationComponent() {
         return mApplicationComponent;
     }
 

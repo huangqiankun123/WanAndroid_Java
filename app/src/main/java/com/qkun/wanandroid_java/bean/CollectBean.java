@@ -117,6 +117,15 @@ public class CollectBean {
         private int userId;
         private int visible;
         private int zan;
+        private boolean isCollect =true;
+
+        public boolean isCollect() {
+            return isCollect;
+        }
+
+        public void setCollect(boolean collect) {
+            isCollect = collect;
+        }
 
         public String getAuthor() {
             return author;

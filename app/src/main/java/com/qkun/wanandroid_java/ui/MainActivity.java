@@ -1,6 +1,7 @@
 package com.qkun.wanandroid_java.ui;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
@@ -9,6 +10,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +23,7 @@ import android.widget.Toast;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.qkun.wanandroid_java.R;
@@ -75,6 +79,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        BarUtils.setStatusBarColor(MainActivity.this,getResources().getColor(R.color.colorPrimary),0);
         setSupportActionBar(mToolbar);
         mToolbar.setTitle(getString(R.string.app_name));
 
@@ -212,7 +217,17 @@ public class MainActivity extends BaseActivity {
                         }
                         break;
                     case R.id.nav_night_mode:
-                        Toast.makeText(MainActivity.this, "夜间模式", Toast.LENGTH_SHORT).show();
+                        //获取当前模式
+                        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_NO;
+                        //将是否为夜间模式保存到SharedPreferences
+                        SPUtils.getInstance(Constant.SHARED_NAME).put(Constant.NIGHT_KEY, currentNightMode == Configuration.UI_MODE_NIGHT_NO);
+                        //切换模式
+                        getDelegate().setDefaultNightMode(currentNightMode == Configuration.UI_MODE_NIGHT_NO ?
+                                AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+                        SPUtils.getInstance(Constant.SHARED_NAME).put(Constant.CHANGE_KEY, true);
+                        getWindow().setWindowAnimations(R.style.WindowAnimationFadeInOut);
+                        recreate();
+
                         break;
                     case R.id.nav_todo:
                         Toast.makeText(MainActivity.this, "todo", Toast.LENGTH_SHORT).show();

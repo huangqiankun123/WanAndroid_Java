@@ -14,6 +14,10 @@ public class Constant {
     public static final String USER_KEY = "user";
     public static final String BANNER_KEY = "banner";
     public static final String ARTICLE_KEY = "article";
+    //Night day mode
+    public static final String NIGHT_KEY = "night";
+    //是否切换了
+    public static final String CHANGE_KEY = "change";
 
     /**
      * 每页数量

@@ -83,4 +83,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     public void showFailed(String message) {
         ToastUtils.showShort(message);
     }
+
+
 }

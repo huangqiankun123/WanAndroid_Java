@@ -1,11 +1,12 @@
 package com.qkun.wanandroid_java.ui.collect;
 
-import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.BarUtils;
@@ -14,7 +15,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.qkun.wanandroid_java.R;
 import com.qkun.wanandroid_java.base.BaseActivity;
 import com.qkun.wanandroid_java.bean.CollectBean;
-import com.qkun.wanandroid_java.ui.MainActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
@@ -22,7 +22,6 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by QKun on 2018/11/8.
@@ -56,6 +55,9 @@ public class CollectActivity extends BaseActivity<CollectPresenter> implements C
         mRecyclerView.addItemDecoration(new DividerItemDecoration(CollectActivity.this, DividerItemDecoration.VERTICAL));
         mCollectAdapter = new CollectAdapter(new ArrayList<CollectBean.DatasBean>());
         mRecyclerView.setAdapter(mCollectAdapter);
+
+        View empty_view = LayoutInflater.from(CollectActivity.this).inflate(R.layout.recycle_empty, (ViewGroup) mRecyclerView.getParent(), false);
+        mCollectAdapter.setEmptyView(empty_view);
 
         mPresenter.loadCollectList();
 

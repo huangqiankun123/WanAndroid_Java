@@ -4,6 +4,7 @@ import com.qkun.wanandroid_java.bean.CollectBean;
 import com.qkun.wanandroid_java.bean.CollectStatus;
 import com.qkun.wanandroid_java.bean.HomeBannerBean;
 import com.qkun.wanandroid_java.bean.ArticlesBean;
+import com.qkun.wanandroid_java.bean.HotKeyBean;
 import com.qkun.wanandroid_java.bean.LoginBean;
 
 import java.util.List;
@@ -47,15 +48,26 @@ public interface ApiService {
     Observable<BaseResponse<ArticlesBean>> getHomeArticles(@Path("page") int page);
 
     /**
-     * 首页banner
+     * 1.2 首页banner
      *
      * @return
      */
     @GET("banner/json")
     Observable<BaseResponse<List<HomeBannerBean>>> getHomeBanner();
 
+
+    /**
+     * 1.4 搜索热词
+     *
+     * @return
+     */
+    @GET("hotkey/json")
+    Observable<BaseResponse<List<HotKeyBean>>> getHotkey();
+
+
     /**
      * 6.1 收藏文章列表
+     *
      * @param page
      * @return
      */

@@ -2,6 +2,7 @@ package com.qkun.wanandroid_java.ui.search;
 
 import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -19,6 +20,7 @@ import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -36,8 +38,7 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
     TextView mTvSearchClear;
     @BindView(R.id.rv_history_search)
     RecyclerView mRvHistorySearch;
-    @BindView(R.id.search_scroll_view)
-    NestedScrollView mSearchScrollView;
+
 
 
     @Override
@@ -60,6 +61,11 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
                 finish();
             }
         });
+
+        mRvHistorySearch.setLayoutManager(new LinearLayoutManager(this));
+        HistoryAdapter historyAdapter =new HistoryAdapter(new ArrayList<Object>());
+        mRvHistorySearch.setAdapter(historyAdapter);
+//        historyAdapter.setEmptyView();
 
         mPresenter.loadHotkey();
     }

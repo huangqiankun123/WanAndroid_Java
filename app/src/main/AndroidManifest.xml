@@ -37,6 +37,9 @@
             android:name=".ui.collect.CollectActivity"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".ui.activity.DefinedActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

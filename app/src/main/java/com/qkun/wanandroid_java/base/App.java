@@ -2,6 +2,7 @@ package com.qkun.wanandroid_java.base;
 
 import android.app.Application;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatDelegate;
 
 import com.blankj.utilcode.util.SPUtils;
@@ -9,6 +10,8 @@ import com.blankj.utilcode.util.SpanUtils;
 import com.blankj.utilcode.util.Utils;
 import com.qkun.wanandroid_java.R;
 import com.qkun.wanandroid_java.constant.Constant;
+import com.qkun.wanandroid_java.dao.DaoMaster;
+import com.qkun.wanandroid_java.dao.DaoSession;
 import com.qkun.wanandroid_java.di.component.ApplicationComponent;
 import com.qkun.wanandroid_java.di.component.DaggerApplicationComponent;
 import com.qkun.wanandroid_java.di.mudule.ApplicationModule;
@@ -21,12 +24,15 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
+import org.greenrobot.greendao.AbstractDaoMaster;
+
 /**
  * Created by QKun on 2018/10/31.
  */
 public class App extends Application {
     private static App mInstance;
     private ApplicationComponent mApplicationComponent;
+    private static DaoSession mDaoSession;
 
     @Override
     public void onCreate() {
@@ -35,7 +41,23 @@ public class App extends Application {
         initApplicationComponent();
         Utils.init(this);
         setNightMode();
+        initDatabase();
     }
+
+    private void initDatabase() {
+        //创建数据库history.db
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "wanandroid.db", null);
+        //获取可写数据库
+        SQLiteDatabase database = helper.getWritableDatabase();
+        DaoMaster daoMaster = new DaoMaster(database);
+        //获取dao对象管理者
+        mDaoSession = daoMaster.newSession();
+    }
+
+    public static DaoSession getDaoSession() {
+        return mDaoSession;
+    }
+
 
     /**
      * 初始化夜间模式

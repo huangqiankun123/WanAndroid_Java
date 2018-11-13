@@ -1,5 +1,6 @@
 package com.qkun.wanandroid_java.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ import com.qkun.wanandroid_java.R;
 import com.qkun.wanandroid_java.base.BaseFragment;
 import com.qkun.wanandroid_java.bean.HomeBannerBean;
 import com.qkun.wanandroid_java.bean.ArticlesBean;
+import com.qkun.wanandroid_java.ui.WebActivity;
 import com.qkun.wanandroid_java.ui.login.LoginActivity;
 import com.qkun.wanandroid_java.utils.GlideImageLoader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -92,7 +94,13 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         mHomeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ToastUtils.showShort("点击条目事件触发 TODO");
+                String link = mHomeAdapter.getData().get(position).getLink();
+//                Intent intent = new Intent(getActivity(), WebActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("link", link);
+//                intent.putExtras(bundle);
+//                startActivity(intent);
+                ActivityUtils.startActivity(bundle,WebActivity.class);
             }
         });
         mHomeAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {

@@ -59,6 +59,7 @@
         app:layout_constraintTop_toTopOf="@+id/tv_article_new" />
 
     <android.support.v7.widget.AppCompatImageView
+        android:visibility="gone"
         android:id="@+id/iv_article_thumbnail"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_90"
@@ -69,7 +70,7 @@
     <TextView
         android:id="@+id/tv_article_title"
         android:layout_width="0dp"
-        android:layout_height="19dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_10"
         android:ellipsize="end"
@@ -86,8 +87,8 @@
         android:id="@+id/tv_article_chapterName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_10"
         android:text="开源项目Tab/完成项目。哈哈"
         android:textColor="@color/item_chapter"
         android:textSize="@dimen/item_tv_tag"

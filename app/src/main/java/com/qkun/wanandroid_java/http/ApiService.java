@@ -6,6 +6,7 @@ import com.qkun.wanandroid_java.bean.HomeBannerBean;
 import com.qkun.wanandroid_java.bean.ArticlesBean;
 import com.qkun.wanandroid_java.bean.HotKeyBean;
 import com.qkun.wanandroid_java.bean.LoginBean;
+import com.qkun.wanandroid_java.bean.SearchListBean;
 
 import java.util.List;
 
@@ -92,4 +93,15 @@ public interface ApiService {
      */
     @POST("lg/uncollect_originId/{id}/json")
     Observable<CollectStatus> unCollect(@Path("id") int id);
+
+    /**
+     * 7.1 搜索
+     *
+     * @param page  页数
+     * @param query 关键字
+     * @return
+     */
+    @POST("article/query/{page}/json")
+    @FormUrlEncoded
+    Observable<BaseResponse<SearchListBean>> search(@Path("page") int page, @Field("k") String query);
 }

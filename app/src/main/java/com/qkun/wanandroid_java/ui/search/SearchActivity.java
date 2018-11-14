@@ -1,5 +1,6 @@
 package com.qkun.wanandroid_java.ui.search;
 
+import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,13 +13,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.ToastUtils;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.qkun.wanandroid_java.R;
 import com.qkun.wanandroid_java.base.BaseActivity;
-import com.qkun.wanandroid_java.db.DataManager;
 import com.qkun.wanandroid_java.db.HistoryModel;
+import com.qkun.wanandroid_java.ui.search.searchlist.SearchListActivity;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
@@ -139,7 +139,9 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
     public boolean onQueryTextSubmit(String query) {
         //先添加到数据库中 再跳转
         mPresenter.addHistory(query);
-        ToastUtils.showShort(query);
+        Bundle bundle = new Bundle();
+        bundle.putString("query", query);
+        ActivityUtils.startActivity(bundle, SearchListActivity.class);
         return true;
     }
 

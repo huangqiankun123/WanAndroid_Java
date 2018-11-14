@@ -95,11 +95,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 String link = mHomeAdapter.getData().get(position).getLink();
-//                Intent intent = new Intent(getActivity(), WebActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("link", link);
-//                intent.putExtras(bundle);
-//                startActivity(intent);
                 ActivityUtils.startActivity(bundle,WebActivity.class);
             }
         });

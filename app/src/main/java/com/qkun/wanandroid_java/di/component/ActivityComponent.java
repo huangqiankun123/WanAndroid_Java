@@ -9,6 +9,7 @@ import com.qkun.wanandroid_java.di.scope.PerActivity;
 import com.qkun.wanandroid_java.ui.collect.CollectActivity;
 import com.qkun.wanandroid_java.ui.login.LoginActivity;
 import com.qkun.wanandroid_java.ui.search.SearchActivity;
+import com.qkun.wanandroid_java.ui.search.searchlist.SearchListActivity;
 
 import dagger.Component;
 
@@ -33,4 +34,6 @@ public interface ActivityComponent {
     void inject(CollectActivity activity);
 
     void inject(SearchActivity activity);
+
+    void inject(SearchListActivity activity);
 }

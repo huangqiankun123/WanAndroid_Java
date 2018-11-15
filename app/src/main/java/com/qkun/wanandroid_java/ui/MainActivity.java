@@ -35,6 +35,7 @@ import com.qkun.wanandroid_java.http.BaseObserver;
 import com.qkun.wanandroid_java.http.RetrofitManager;
 import com.qkun.wanandroid_java.http.RxSchedulers;
 import com.qkun.wanandroid_java.http.cookies.CookiesManager;
+import com.qkun.wanandroid_java.ui.activity.DefinedActivity;
 import com.qkun.wanandroid_java.ui.collect.CollectActivity;
 import com.qkun.wanandroid_java.ui.home.HomeFragment;
 import com.qkun.wanandroid_java.ui.knowledge.KnowledgeFragment;
@@ -79,7 +80,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        BarUtils.setStatusBarColor(MainActivity.this,getResources().getColor(R.color.colorPrimary),0);
+        BarUtils.setStatusBarColor(MainActivity.this, getResources().getColor(R.color.colorPrimary), 0);
         setSupportActionBar(mToolbar);
         mToolbar.setTitle(getString(R.string.app_name));
 
@@ -203,7 +204,7 @@ public class MainActivity extends BaseActivity {
                         }
                         break;
                     case R.id.nav_setting:
-                        Toast.makeText(MainActivity.this, "设置", Toast.LENGTH_SHORT).show();
+                        ActivityUtils.startActivity(SettingActivity.class);
                         break;
                     case R.id.nav_about_us:
                         Toast.makeText(MainActivity.this, "关于我们", Toast.LENGTH_SHORT).show();
@@ -233,8 +234,7 @@ public class MainActivity extends BaseActivity {
                         Toast.makeText(MainActivity.this, "todo", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.nav_defined:
-
-                        ToastUtils.showShort("我们玩自定义控件去了奥");
+                        ActivityUtils.startActivity(DefinedActivity.class);
                         break;
                 }
                 return true;

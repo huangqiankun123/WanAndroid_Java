@@ -51,6 +51,13 @@
             android:name=".ui.search.searchlist.SearchListActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ui.SettingActivity"
+            android:screenOrientation="portrait" />
+
+        <!--UI start-->
+            <activity android:name=".ui.activity.ShaderActivity"/>
+        <!--UI end-->
     </application>
 
 </manifest>

@@ -92,6 +92,11 @@ public abstract class BaseActivity<T extends BaseContract.BaseIPresent> extends 
     @Override
     protected void onResume() {
         super.onResume();
+        initColor();
+    }
+
+    private void initColor() {
+
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.qkun.wanandroid_java.bean.CollectStatus;
 import com.qkun.wanandroid_java.bean.HomeBannerBean;
 import com.qkun.wanandroid_java.bean.ArticlesBean;
 import com.qkun.wanandroid_java.bean.HotKeyBean;
+import com.qkun.wanandroid_java.bean.KnowledgeTreeBean;
 import com.qkun.wanandroid_java.bean.LoginBean;
 import com.qkun.wanandroid_java.bean.SearchListBean;
 
@@ -64,6 +65,14 @@ public interface ApiService {
      */
     @GET("hotkey/json")
     Observable<BaseResponse<List<HotKeyBean>>> getHotkey();
+
+
+    /**
+     * 2.1 体系数据
+     * @return
+     */
+    @GET("tree/json")
+    Observable<BaseResponse<List<KnowledgeTreeBean>>> getKnowledgeTree();
 
 
     /**

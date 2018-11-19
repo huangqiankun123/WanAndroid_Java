@@ -1,6 +1,5 @@
 package com.qkun.wanandroid_java.ui.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,8 +13,8 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.qkun.wanandroid_java.R;
 import com.qkun.wanandroid_java.base.BaseFragment;
-import com.qkun.wanandroid_java.bean.HomeBannerBean;
 import com.qkun.wanandroid_java.bean.ArticlesBean;
+import com.qkun.wanandroid_java.bean.HomeBannerBean;
 import com.qkun.wanandroid_java.ui.WebActivity;
 import com.qkun.wanandroid_java.ui.login.LoginActivity;
 import com.qkun.wanandroid_java.utils.GlideImageLoader;

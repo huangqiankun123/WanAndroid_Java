@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -14,6 +16,7 @@ import com.qkun.wanandroid_java.base.BaseFragment;
 import com.qkun.wanandroid_java.bean.ArticlesBean;
 import com.qkun.wanandroid_java.bean.KnowledgeListBean;
 import com.qkun.wanandroid_java.ui.WebActivity;
+import com.qkun.wanandroid_java.ui.collect.CollectActivity;
 import com.qkun.wanandroid_java.ui.login.LoginActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -62,12 +65,13 @@ public class KnowledgeListFragment extends BaseFragment<KnowledgeListPresenter> 
     @Override
     protected void initView(View view) {
         final int cid = getArguments().getInt(TAG);
-        ToastUtils.showShort("id-->" + cid);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         mAdapter = new KnowledgeListAdapter(new ArrayList<KnowledgeListBean.DatasBean>());
         mRecyclerView.setAdapter(mAdapter);
+        View empty_view = LayoutInflater.from(getActivity()).inflate(R.layout.recycle_empty, (ViewGroup) mRecyclerView.getParent(), false);
+        mAdapter.setEmptyView(empty_view);
 
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -96,6 +100,7 @@ public class KnowledgeListFragment extends BaseFragment<KnowledgeListPresenter> 
                 }
             }
         });
+        mRefreshLayout.autoRefresh();
         mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {

@@ -8,10 +8,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+
+import com.blankj.utilcode.util.BarUtils;
 import com.qkun.wanandroid_java.R;
 import com.qkun.wanandroid_java.base.BaseActivity;
 import com.qkun.wanandroid_java.base.BaseFragment;
 import com.qkun.wanandroid_java.bean.KnowledgeTreeBean;
+import com.qkun.wanandroid_java.ui.MainActivity;
 import com.qkun.wanandroid_java.ui.knowledge.knowledgelist.KnowledgeListFragment;
 
 import java.util.ArrayList;
@@ -43,6 +46,8 @@ public class KnowledgeActivity extends BaseActivity implements TabLayout.BaseOnT
 
     @Override
     protected void initView() {
+        BarUtils.setStatusBarColor(KnowledgeActivity.this, getResources().getColor(R.color.colorPrimary), 0);
+
         Bundle extras = getIntent().getExtras();
         KnowledgeTreeBean treeBean = (KnowledgeTreeBean) extras.getSerializable("bean");
         if (null != treeBean) {

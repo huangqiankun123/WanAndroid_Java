@@ -16,7 +16,6 @@
         app:tabIndicatorColor="@color/white"
         app:tabMode="scrollable"
         app:tabSelectedTextColor="@color/white"
-        app:tabTextAppearance="@android:style/TextAppearance.Holo.Large"
         app:tabTextColor="@color/white" />
 
     <android.support.v4.view.ViewPager

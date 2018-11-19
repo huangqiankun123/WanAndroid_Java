@@ -5,6 +5,7 @@ import com.qkun.wanandroid_java.bean.CollectStatus;
 import com.qkun.wanandroid_java.bean.HomeBannerBean;
 import com.qkun.wanandroid_java.bean.ArticlesBean;
 import com.qkun.wanandroid_java.bean.HotKeyBean;
+import com.qkun.wanandroid_java.bean.KnowledgeListBean;
 import com.qkun.wanandroid_java.bean.KnowledgeTreeBean;
 import com.qkun.wanandroid_java.bean.LoginBean;
 import com.qkun.wanandroid_java.bean.SearchListBean;
@@ -17,6 +18,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by QKun on 2018/11/6.
@@ -69,10 +71,20 @@ public interface ApiService {
 
     /**
      * 2.1 体系数据
+     *
      * @return
      */
     @GET("tree/json")
     Observable<BaseResponse<List<KnowledgeTreeBean>>> getKnowledgeTree();
+
+    /**
+     * 2.2 知识体系下的文章
+     * @param page
+     * @param cid
+     * @return
+     */
+    @GET("article/list/{page}/json")
+    Observable<BaseResponse<KnowledgeListBean>> getKnowledgeList(@Path("page") int page, @Query("cid") int cid);
 
 
     /**

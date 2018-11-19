@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.blankj.utilcode.util.ActivityUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.qkun.wanandroid_java.R;
 import com.qkun.wanandroid_java.base.BaseFragment;
 import com.qkun.wanandroid_java.bean.KnowledgeTreeBean;
@@ -54,11 +56,20 @@ public class KnowledgeFragment extends BaseFragment<KnowledgePresneter> implemen
     @Override
     protected void initView(View view) {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         mAdapter = new KnowledgeAdapter(new ArrayList<KnowledgeTreeBean>());
         mRecyclerView.setAdapter(mAdapter);
         View recycle_empty = LayoutInflater.from(getActivity()).inflate(R.layout.recycle_empty, (ViewGroup) mRecyclerView.getParent(), false);
         mAdapter.setEmptyView(recycle_empty);
+
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("bean", mAdapter.getData().get(position));
+                ActivityUtils.startActivity(bundle, KnowledgeActivity.class);
+            }
+        });
 
         mPresenter.loadKnowledgeTree();
     }

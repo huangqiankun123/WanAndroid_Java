@@ -8,6 +8,7 @@ import com.qkun.wanandroid_java.di.scope.ContextLife;
 import com.qkun.wanandroid_java.di.scope.PerFragment;
 import com.qkun.wanandroid_java.ui.home.HomeFragment;
 import com.qkun.wanandroid_java.ui.knowledge.KnowledgeFragment;
+import com.qkun.wanandroid_java.ui.knowledge.knowledgelist.KnowledgeListFragment;
 
 import dagger.Component;
 
@@ -30,4 +31,6 @@ public interface FragmentComponent {
     void inject(HomeFragment fragment);
 
     void inject(KnowledgeFragment fragment);
+
+    void inject(KnowledgeListFragment fragment);
 }

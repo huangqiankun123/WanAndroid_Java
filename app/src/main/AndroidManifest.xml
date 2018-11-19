@@ -55,8 +55,12 @@
             android:name=".ui.SettingActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ui.knowledge.KnowledgeActivity"
+            android:screenOrientation="portrait" />
+
         <!--UI start-->
-            <activity android:name=".ui.activity.ShaderActivity"/>
+        <activity android:name=".ui.activity.ShaderActivity" />
         <!--UI end-->
     </application>
 
